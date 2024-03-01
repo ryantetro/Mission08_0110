@@ -11,8 +11,8 @@ using Mission08_0110.Models;
 namespace Mission08_0110.Migrations
 {
     [DbContext(typeof(JobContext))]
-    [Migration("20240229044242_AddJob")]
-    partial class AddJob
+    [Migration("20240301175818_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,14 +20,30 @@ namespace Mission08_0110.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.2");
 
+            modelBuilder.Entity("Mission08_0110.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("Mission08_0110.Models.Job", b =>
                 {
                     b.Property<int>("JobId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("CategoryName")
-                        .HasColumnType("TEXT");
+                    b.Property<int?>("CategoryId")
+                        .IsRequired()
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool?>("Completed")
                         .HasColumnType("INTEGER");
@@ -45,7 +61,25 @@ namespace Mission08_0110.Migrations
 
                     b.HasKey("JobId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Jobs");
+                });
+
+            modelBuilder.Entity("Mission08_0110.Models.Job", b =>
+                {
+                    b.HasOne("Mission08_0110.Models.Category", "Category")
+                        .WithMany("Jobs")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Mission08_0110.Models.Category", b =>
+                {
+                    b.Navigation("Jobs");
                 });
 #pragma warning restore 612, 618
         }

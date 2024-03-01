@@ -6,8 +6,8 @@ namespace Mission08_0110.Models
     public class EFJobRepository : IJobRepository
     {
         private JobContext _context;
-        public EFJobRepository(JobContext temp) 
-        { 
+        public EFJobRepository(JobContext temp)
+        {
             _context = temp;
         }
 
@@ -29,6 +29,39 @@ namespace Mission08_0110.Models
         {
             _context.Jobs.Remove(job);
             _context.SaveChanges();
+        }
+
+        // Synchronous category methods implementation
+        public IEnumerable<Category> GetAllCategories()
+        {
+            return _context.Categories.ToList();
+        }
+
+        public void AddCategory(Category category)
+        {
+            _context.Categories.Add(category);
+            _context.SaveChanges();
+        }
+
+        public Category GetCategoryById(int categoryId)
+        {
+            return _context.Categories.Find(categoryId);
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            _context.Categories.Update(category);
+            _context.SaveChanges();
+        }
+
+        public void DeleteCategory(int categoryId)
+        {
+            var category = _context.Categories.Find(categoryId);
+            if (category != null)
+            {
+                _context.Categories.Remove(category);
+                _context.SaveChanges();
+            }
         }
     }
 }

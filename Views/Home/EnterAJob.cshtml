@@ -36,13 +36,9 @@
             <div class="invalid-feedback">Quadrant is required</div>
         </div>
         <div class="form-group">
-            <label asp-for="CategoryName">Category</label>
-            <select required asp-for="CategoryName" class="form-control">
-                <option value="" selected disabled>Please Select an Option</option>
-                <option value="Home">Home</option>
-                <option value="School">School</option>
-                <option value="Work">Work</option>
-                <option value="Church">Church</option>
+            <label asp-for="CategoryId">Category</label>
+            <select asp-for="CategoryId" asp-items="@(ViewBag.Categories)" class="form-control" required>
+                <option value="" selected>Select a Category</option>
             </select>
         </div>
         <div class="form-group">

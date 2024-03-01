@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Mission08_0110.Models;
 using System.Diagnostics;
+using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Mission08_0110.Controllers
@@ -20,6 +21,7 @@ namespace Mission08_0110.Controllers
         [HttpGet]
         public IActionResult EnterAJob()
         {
+            ViewBag.Categories = new SelectList(_repo.GetAllCategories(), "CategoryId", "Name");
             return View();
         }
         [HttpPost]
@@ -28,11 +30,12 @@ namespace Mission08_0110.Controllers
             if (ModelState.IsValid)
             {
                 _repo.AddJob(response);
-                return View("Confirmation", response);
+                return RedirectToAction("JobList");
             }
             else
             {
-                return View(response); // Return to the form with validation messages
+                ViewBag.Categories = new SelectList(_repo.GetAllCategories(), "CategoryId", "Name");
+                return View(response);
             }
 
         }
