@@ -21,5 +21,6 @@
         Category GetCategoryById(int categoryId);
         void UpdateCategory(Category category);
         void DeleteCategory(int categoryId);
+        void SaveChanges();
     }
 }

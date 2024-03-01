@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.EntityFrameworkCore;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Mission08_0110.Models
@@ -16,7 +17,7 @@ namespace Mission08_0110.Models
 
         // Retrieves all jobs from the database.
 
-        public List<Job> Jobs => _context.Jobs.ToList();
+        public List<Job> Jobs => _context.Jobs.Include("Category").ToList();
         // Adds a new job to the database.
 
         public void AddJob(Job job)
@@ -72,5 +73,12 @@ namespace Mission08_0110.Models
                 _context.SaveChanges();
             }
         }
+
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
+
+

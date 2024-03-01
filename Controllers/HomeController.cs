@@ -7,23 +7,31 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Mission08_0110.Controllers
 {
+    // Inherits from the Controller base class provided by ASP.NET Core.
     public class HomeController : Controller
     {
         private IJobRepository _repo;
+        // Constructor to initialize the controller with a job repository instance.
         public HomeController(IJobRepository temp)
         {
             _repo = temp;
         }
+        // Action method for the default index view.
         public IActionResult Index()
         {
             return View();
         }
+        // HTTP GET action method to display a form for entering a new job.
+
         [HttpGet]
         public IActionResult EnterAJob()
         {
             ViewBag.Categories = new SelectList(_repo.GetAllCategories(), "CategoryId", "Name");
             return View();
         }
+
+        // HTTP POST action method to handle form submission for adding a new job.
+
         [HttpPost]
         public IActionResult EnterAJob(Job response)
         {
@@ -39,7 +47,7 @@ namespace Mission08_0110.Controllers
             }
 
         }
-
+        // Action method to display a list of jobs.
         public IActionResult JobList()
         {
             var jobs = _repo.Jobs
@@ -49,6 +57,7 @@ namespace Mission08_0110.Controllers
             return View(jobs);
         }
 
+        // HTTP GET action method to display a form for editing a job.
 
         [HttpGet]
         public IActionResult Edit(int id)
@@ -56,19 +65,25 @@ namespace Mission08_0110.Controllers
             var recordToEdit = _repo.Jobs
                 .Single(x => x.JobId == id);
 
+            ViewBag.Categories = new SelectList(_repo.GetAllCategories(), "CategoryId", "Name");
+
             return View("EnterAJob", recordToEdit);
         }
+        // HTTP POST action method to handle form submission for editing a job.
 
         [HttpPost]
         public IActionResult Edit(Job updated)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _repo.EditJob(updated);
-            }
+
+            //}
 
             return RedirectToAction("JobList");
         }
+
+        // HTTP GET action method to display a confirmation page before deleting a job.
 
         [HttpGet]
         public IActionResult Delete(int id)
@@ -82,26 +97,27 @@ namespace Mission08_0110.Controllers
 
             return View(recordToDelete);
         }
-
+        // HTTP POST action method to handle deletion of a job.
         [HttpPost]
         public IActionResult Delete(Job deletedJob)
         {
-            if (!ModelState.IsValid)
-            {
-                // Debug: Inspect ModelState errors
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-                foreach (var error in errors)
-                {
-                    // Log or debug the error messages
-                    Debug.WriteLine(error.ErrorMessage);
-                }
+            //if (!ModelState.IsValid)
+            //{
+            //    // Debug: Inspect ModelState errors
+            //    var errors = ModelState.Values.SelectMany(v => v.Errors);
+            //    foreach (var error in errors)
+            //    {
+            //        // Log or debug the error messages
+            //        Debug.WriteLine(error.ErrorMessage);
+            //    }
 
-                // Handle invalid model state
-                return View(deletedJob);
-            }
+            //    // Handle invalid model state
+            //    return View(deletedJob);
+            //}
 
             // Continue with deletion logic if model state is valid
             _repo.DeleteJob(deletedJob);
+            
             return RedirectToAction("JobList");
         }
 
