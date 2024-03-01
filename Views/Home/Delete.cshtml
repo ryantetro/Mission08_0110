@@ -9,9 +9,11 @@
 <h2>Confirm Deletion</h2>
 <h3>@Model.JobName</h3>
 
-<form method="post">
-
+<form method="post" asp-action="Delete">
+    <input type="hidden" asp-for="JobName" />
+    <input type="hidden" asp-for="Quadrant" />
     <input type="hidden" asp-for="JobId" />
     <button type="submit">Delete</button>
-    <a class="btn btn-info" asp-controller="Home" asp-action="MovieList">Cancel</a>
+    <a class="btn btn-info" asp-controller="Home" asp-action="JobList">Cancel</a>
 </form>
+

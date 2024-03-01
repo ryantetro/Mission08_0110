@@ -34,7 +34,7 @@ namespace Mission08_0110.Controllers
             {
                 return View(response); // Return to the form with validation messages
             }
-            
+
         }
 
         public IActionResult JobList()
@@ -70,21 +70,40 @@ namespace Mission08_0110.Controllers
         [HttpGet]
         public IActionResult Delete(int id)
         {
-            var recordToDelete = _repo.Jobs.Single(x => x.JobId == id);
+            var recordToDelete = _repo.Jobs.SingleOrDefault(x => x.JobId == id);
+
+            if (recordToDelete == null)
+            {
+                return NotFound(); // Or handle the case where the job does not exist
+            }
 
             return View(recordToDelete);
         }
 
         [HttpPost]
-        public IActionResult Delete(Job deleted)
+        public IActionResult Delete(Job deletedJob)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                _repo.DeleteJob(deleted);
+                // Debug: Inspect ModelState errors
+                var errors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in errors)
+                {
+                    // Log or debug the error messages
+                    Debug.WriteLine(error.ErrorMessage);
+                }
+
+                // Handle invalid model state
+                return View(deletedJob);
             }
 
+            // Continue with deletion logic if model state is valid
+            _repo.DeleteJob(deletedJob);
             return RedirectToAction("JobList");
         }
 
+
+
     }
+
 }
