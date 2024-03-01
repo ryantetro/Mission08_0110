@@ -1,8 +1,13 @@
 ﻿namespace Mission08_0110.Models
 {
+    // Interface for job repository operations.
     public interface IJobRepository
     {
+        // Property to retrieve all jobs.
+
         List<Job> Jobs { get; }
+
+        // Methods for adding, editing, and deleting jobs.
 
         public void AddJob(Job job);
 

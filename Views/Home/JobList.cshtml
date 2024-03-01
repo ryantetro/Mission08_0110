@@ -2,7 +2,7 @@
 }﻿
 
 @model List<Job>
-
+@* task list that has custom styles and the form for users to add a task to the quadrant view  *@
 
 <!DOCTYPE html>
 <html>
@@ -91,7 +91,7 @@
                                                 <tr>
                                                     <td>@temp.JobName</td>
                                                     <td>@temp.DueDate</td>
-                                                    <td>@temp.Category.Name
+                                                    <td>@temp.Category?.Name
                                                     <td>@temp.Completed</td>
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="Action Buttons">
@@ -131,7 +131,7 @@
                                                 <tr>
                                                     <td>@temp.JobName</td>
                                                     <td>@temp.DueDate</td>
-                                                    <td>@temp.Category.Name
+                                                    <td>@temp.Category?.Name</td>
                                                     <td>@temp.Completed</td>
                                                     <td>
                                                         <div class="btn-group" role="group" aria-label="Action Buttons">

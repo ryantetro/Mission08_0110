@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+//define the models for a job tracking system
 namespace Mission08_0110.Models
 {
     public class Job
