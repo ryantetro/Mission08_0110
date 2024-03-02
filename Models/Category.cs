@@ -10,7 +10,6 @@ namespace Mission08_0110.Models
         public int CategoryId { get; set; }
 
         // The name of the category, required field
-        [Required]
         public string Name { get; set; }
 
         // Navigation property to relate each category to multiple jobs
