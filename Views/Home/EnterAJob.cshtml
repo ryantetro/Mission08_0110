@@ -38,13 +38,13 @@
         </div>
         <div class="form-group">
             <label asp-for="CategoryId">Category</label>
-            <select asp-for="CategoryId" asp-items="@(ViewBag.Categories)" class="form-control" required>
-                <option value="" selected>Select a Category</option>
+            <select asp-for="CategoryId" asp-items="@(ViewBag.Categories)" class="form-control">
+                <option value="" selected disabled>Select a Category</option>
             </select>
         </div>
         <div class="form-group">
             <label asp-for="Completed">Completed</label>
-            <select required asp-for="Completed" class="form-control">
+            <select asp-for="Completed" class="form-control">
                 <option value="" selected disabled>Please Select an Option</option>
                 <option value="true">Yes</option>
                 <option value="false">No</option>

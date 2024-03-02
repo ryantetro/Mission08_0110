@@ -33,7 +33,7 @@ namespace Mission08_0110.Migrations
                     JobName = table.Column<string>(type: "TEXT", nullable: false),
                     DueDate = table.Column<DateTime>(type: "TEXT", nullable: true),
                     Quadrant = table.Column<string>(type: "TEXT", nullable: false),
-                    CategoryId = table.Column<int>(type: "INTEGER", nullable: false),
+                    CategoryId = table.Column<int>(type: "INTEGER", nullable: true),
                     Completed = table.Column<bool>(type: "INTEGER", nullable: true)
                 },
                 constraints: table =>
