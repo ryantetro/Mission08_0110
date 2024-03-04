@@ -21,7 +21,6 @@
             @{
                 string dueDateValue = Model?.DueDate?.ToString("yyyy-MM-dd") ?? "";
             }
-            @* <input type="date" id="DueDate" name="DueDate" class="form-control" value="@dueDateValue" /> *@
             <input type="date" asp-for="DueDate" />
         </div>
 
@@ -52,19 +51,6 @@
         </div>
         <br />
         <button type="submit" class="btn btn-primary">Submit Task to Database</button>
-       @*      @if (Model != null && Model.JobId != 0)
-            {
-                <text>Update Task</text>
-            }
-            else
-            {
-                <text>Submit Task To Database</text>
-            }
-        </button>
-        @if (Model != null)
-        {
-            <input type="hidden" asp-for="JobId" />
-        } *@
 
     </form>
 </div>

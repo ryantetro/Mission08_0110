@@ -18,13 +18,13 @@ namespace Mission08_0110.Models
         //[Required(ErrorMessage = "Quadrant is required")]
         public required string Quadrant { get; set; }
 
-        [ForeignKey("CategoryId")]
+        [ForeignKey("Category")]
         // New properties for the Category relationship
-        public int CategoryId { get; set; }  // Foreign key property
+        public int? CategoryId { get; set; }  // Foreign key property
 
         public Category? Category { get; set; }  // Navigation property
 
-        public bool? Completed { get; set; }
+        public bool Completed { get; set; } = false; 
     }
 
 }

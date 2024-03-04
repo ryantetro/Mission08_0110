@@ -35,16 +35,9 @@ namespace Mission08_0110.Controllers
         [HttpPost]
         public IActionResult EnterAJob(Job response)
         {
-            //if (ModelState.IsValid)
-            //{
+
                 _repo.AddJob(response);
                 return RedirectToAction("JobList");
-            //}
-            //else
-            //{
-                //ViewBag.Categories = new SelectList(_repo.GetAllCategories(), "CategoryId", "Name");
-                //return View(response);
-            //}
 
         }
         // Action method to display a list of jobs.
@@ -74,11 +67,8 @@ namespace Mission08_0110.Controllers
         [HttpPost]
         public IActionResult Edit(Job updated)
         {
-            //if (ModelState.IsValid)
-            //{
                 _repo.EditJob(updated);
 
-            //}
 
             return RedirectToAction("JobList");
         }
@@ -101,19 +91,6 @@ namespace Mission08_0110.Controllers
         [HttpPost]
         public IActionResult Delete(Job deletedJob)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    // Debug: Inspect ModelState errors
-            //    var errors = ModelState.Values.SelectMany(v => v.Errors);
-            //    foreach (var error in errors)
-            //    {
-            //        // Log or debug the error messages
-            //        Debug.WriteLine(error.ErrorMessage);
-            //    }
-
-            //    // Handle invalid model state
-            //    return View(deletedJob);
-            //}
 
             // Continue with deletion logic if model state is valid
             _repo.DeleteJob(deletedJob);
